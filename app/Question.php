@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Question extends Model
  {
     //
-    protected $fillable = ['subject','content','image',];
+    protected $fillable = ['subject','content','image_path',];
     
     public function user()
     {

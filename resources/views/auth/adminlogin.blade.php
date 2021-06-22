@@ -9,7 +9,7 @@
     <div class="row">
         <div class="col-sm-6 offset-sm-3">
 
-            {!! Form::open(['route' => 'admin.login']) !!}
+            {!! Form::open(['route' => 'admin.post']) !!}
                 <div class="form-group">
                     {!! Form::label('email', 'Email') !!}
                     {!! Form::email('email', null, ['class' => 'form-control']) !!}

@@ -16,10 +16,12 @@ class RedirectIfAuthenticated
      * @param  string|null  $guard
      * @return mixed
      */
-    public function handle($request, Closure $next, $guard = null)
+  public function handle($request, Closure $next, $guard = null)
     {
-        if (Auth::guard($guard)->check()) {
+        if (Auth::guard($guard)->check() && $guard === 'user') {
             return redirect(RouteServiceProvider::HOME);
+        } elseif (Auth::guard($guard)->check() && $guard === 'admin') {
+            return redirect(RouteServiceProvider::ADMIN_HOME);
         }
 
         return $next($request);

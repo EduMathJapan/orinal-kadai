@@ -25,4 +25,9 @@ class Admin extends Authenticatable
     {
         return $this->hasMany(Blog::class);
     }
+    
+     public function limitedblogs()
+    {
+        return $this->hasMany(Limitedblog::class);
+    }
 }

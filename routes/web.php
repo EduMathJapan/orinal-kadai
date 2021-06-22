@@ -22,10 +22,21 @@ Route::resource('blogs','BlogsController');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/login/admin', 'Auth\LoginController@showAdminLoginForm')->name('admin.form');
-Route::get('/register/admin', 'Auth\RegisterController@showAdminRegisterForm')->name('admin.regist');
 
-Route::post('/login/admin', 'Auth\LoginController@adminLogin')->name('admin.login');
-Route::post('/register/admin', 'Auth\RegisterController@createAdmin')->name('admin-register');
+Route::get('admin-signup', 'Auth\AdminRegisterController@showRegistrationForm')->name('adminsignup.get');
+Route::post('admin-signup', 'Auth\AdminRegisterController@register')->name('adminsignup.post');
 
-Route::view('/admin', 'admin')->middleware('auth:admin')->name('admin-home');
+Route::get('adminlogin', 'Auth\AdminLoginController@showLoginForm')->name('adminlogin');
+Route::post('adminlogin', 'Auth\AdminLoginController@login')->name('admin.post');
+Route::get('adminlogout', 'Auth\AdminLoginController@logout')->name('adminlogout.get');
+
+
+Route::group(['middleware' => ['auth:admin']], function () {
+    Route::resource('users', 'UsersController', ['only' => ['index', 'show']]);
+    Route::resource('limitedblogs','LimitedblogsController');
+});
+
+Route::group(['middleware' => ['auth:user']], function () {
+    Route::resource('users', 'UsersController', ['only' => ['index', 'show']]);
+    Route::resource('limitedblogs','LimitedblogsController',['only'=>['index','show']]);
+});

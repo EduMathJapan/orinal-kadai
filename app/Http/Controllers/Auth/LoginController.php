@@ -37,24 +37,30 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
-        $this->middleware('guest:admin')->except('logout');
+      
     }
-    public function showAdminLoginForm()
+    protected function guard()
     {
-        return view('auth.adminlogin',['authgroup' => 'admin']);
+        return Auth::guard('user');
     }
 
-    public function adminLogin(Request $request)
+    // ログイン画面
+    public function showLoginForm()
     {
-        $this->validate($request, [
-            'email'   => 'required|email',
-            'password' => 'required|min:6'
-        ]);
+        return view('auth.login');
+    }
 
-        if (Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password], $request->get('remember'))) {
+    // ログアウト処理
+    public function logout(Request $request)
+    {
+        Auth::guard('user')->logout();
 
-            return view('home');
-        }
-        return back()->withInput($request->only('email', 'remember'));
+        return $this->loggedOut($request);
+    }
+
+    // ログアウトした時のリダイレクト先
+    public function loggedOut(Request $request)
+    {
+        return redirect(route('login'));
     }
 }

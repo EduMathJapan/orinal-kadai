@@ -10,7 +10,9 @@
                          </p>
                         <p class="mb-0">{!! nl2br(e($question->content)) !!}
                          </p>
-                        
+                         <div>
+                       <img src="{{ asset('images/' . $question->image_path)}}">
+ ~                      </div>
                     </div>
                     <div>
                         @if (Auth::id() == $question->user_id)

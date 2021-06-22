@@ -12,7 +12,6 @@ class BlogsController extends Controller
     {
         $data = [];
        $blogs = Blog::orderBy('id', 'desc')->paginate(10);
-            
             return view('blogs.index', [
             'blogs' => $blogs,
         ]);
@@ -28,12 +27,21 @@ class BlogsController extends Controller
         $request->validate([
             'title' => 'required|max:255',
             'content'=>'required',
+            ''
         ]);
+        if ($file = $request->image_path) {
+            $fileName =$file->getClientOriginalName();
+            $target_path = public_path('images/');
+            $file->move($target_path, $fileName);
+        } else {
+            $fileName = "";
+        }
 
         // 認証済みユーザ（閲覧者）の投稿として作成（リクエストされた値をもとに作成）
         Blog::create([
             'title'=> $request->title,
             'content' => $request->content,
+            'image_path'=>$fileName,
         ]);
 
         // 前のURLへリダイレクトさせる
@@ -51,5 +59,12 @@ class BlogsController extends Controller
 
         // 前のURLへリダイレクトさせる
         return back();
+    }
+    
+    public function show($id){
+        $blog = Blog::findOrFail($id);
+        
+        // ユーザ詳細ビューでそれを表示
+        return view('blogs.show',['blog'=>$blog]);
     }
 }

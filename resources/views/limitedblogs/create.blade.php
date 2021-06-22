@@ -4,7 +4,7 @@
 <div class = 'questions'>
     
     
-{!! Form::open(['route' => 'blogs.store','files' => true]) !!}
+{!! Form::open(['route' => 'limitedblogs.store','files' => true]) !!}
                 <div class="form-group ">
                     {!! Form::label('title', '題名') !!}
                     {!! Form::text('title', null, ['class' => 'form-control']) !!}

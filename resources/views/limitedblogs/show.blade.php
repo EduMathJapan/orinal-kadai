@@ -2,10 +2,10 @@
 
 @section('content')
 
-<p>{{ $blog->title }}</p>
+<p>{{ $limitedblog->title }}</p>
 
 <div>
-    {{ $blog->content }}
+    {{ $limitedblog->content }}
      <img src="{{ asset('images/' . $blog->image_path)}}">
 </div>
 
