@@ -34,9 +34,11 @@ Route::get('adminlogout', 'Auth\AdminLoginController@logout')->name('adminlogout
 Route::group(['middleware' => ['auth:admin']], function () {
     Route::resource('users', 'UsersController', ['only' => ['index', 'show']]);
     Route::resource('limitedblogs','LimitedblogsController');
+    Route::resource('admin', 'AdminController', ['only' => ['index']]);
+    
 });
 
 Route::group(['middleware' => ['auth:user']], function () {
-    Route::resource('users', 'UsersController', ['only' => ['index', 'show']]);
+    Route::resource('users', 'UsersController', ['only' => ['show']]);
     Route::resource('limitedblogs','LimitedblogsController',['only'=>['index','show']]);
 });

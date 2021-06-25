@@ -18,7 +18,6 @@ header {
     width: 100vw;
     margin: 0;
     background-color: rgba(255, 255, 255, 0.8); 
-    position:fixed;
     top:0px;
     
 }
@@ -35,9 +34,19 @@ header {
     padding:0;
     margin:0;
 }
-.container{
+.container3{
     width:1200px;
     display:flex;
+    margin:50px auto 0px auto;
+    justify-content:space-between;
+}
+    
+.container　{
+    width:1200px;
+    display:flex;
+    margin:50px auto 0px auto;
+    
+    
 }
 
 .content-item{
@@ -45,7 +54,7 @@ header {
     height:500px;
     width:33%;
     text-align:center;
-    justify-content: space-between;
+    justify-content:space-between;
     
 }
 .content-item p{
@@ -93,9 +102,14 @@ header {
 .questions h1{
     text-align:center;
 }
+.content-item p{
+    text-align:left;
+    padding-left:30px;
+}
 
 .item p{
     color:gray;
+    text-align:left;
 }
 .item{
     width:50%;
@@ -104,3 +118,60 @@ header {
     height:10px;
     border-bottom: 2px solid gray;
 }
+
+.margin{
+    height:100px;
+}
+
+.container2{
+    height:250px;
+    
+}
+
+.blogtop{
+    height:300px;
+    width:1200px;
+}
+
+.blogitem{
+    margin-top:50px
+    width:350px;
+    text-align:center;
+    border:2px solid gray;
+    justify-content:space-between;
+    
+    
+}
+
+.title{
+    display:block;
+    height:50px;
+    border-top:2px solid gray;
+    font-size:24px;
+}
+
+.blogtitle{
+    width:1200px;
+   margin-bottom:50px;
+}
+
+.eyecatch{
+    margin:0 auto;
+    width:1200px;
+    
+}
+ .content{
+     padding-top:20px;
+     width:1200px;
+     margin:0 auto;
+     font-size:18px;
+     font-family: 'M PLUS Rounded 1c', sans-serif;
+     color:gray;
+     letter-spacing:1.2;
+     }
+     
+.blogs{
+    width:1200px;
+    margin:0 auto;
+}
+     

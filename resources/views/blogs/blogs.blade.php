@@ -1,22 +1,28 @@
+<div class ='container3'>
+        <img class ='blogtop'src="{{ asset('images/blogtop.png') }}" alt="top">
+</div>
+
+
 @if (count($blogs) > 0)
-    <ul class="list-unstyled">
+
+
+
+<div class = 'container3'>
+    <!--<ul class="list-unstyled blogitem">-->
         @foreach ($blogs as $blog)
-            <li class="media">
+           
                 
-                <div class="media-body">
-                    <div>
-                        {{ $blog->title }}
-                        {{ $blog->content }}
-                        <img src="{{ asset('images/' . $blog->image_path)}}">
-                    </div>
-                    <div>
-                        {{-- ユーザ詳細ページへのリンク --}}
-                        <p>{!! link_to_route('blogs.show', 'Read more', ['blog' => $blog->id]) !!}</p>
+                <div class="blogitem">
+                    <a href = '{{route('blogs.show',['blog'=> $blog->id])}}'><img src="{{ asset('images/'.$blog->eyecatch) }}" ></a>
+                    <div class= 'title'>
+                         <p>{!! link_to_route('blogs.show', $blog->title, ['blog' => $blog->id]) !!}</p>
                     </div>
                 </div>
             </li>
         @endforeach
-     </ul>
+     <!--</ul>-->
     {{-- ページネーションのリンク --}}
     {{ $blogs->links() }}
+    
+</div> 
 @endif

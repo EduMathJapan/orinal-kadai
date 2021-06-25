@@ -13,11 +13,11 @@
             
         </div>
 
-<div class = 'container'>
+<div class = 'container3'>
         <div class='content-item'>
             <a href='{{route('blogs.index')}}'><img class='contentimg' src="{{ asset('images/blog.png') }}" alt="blog"></a>
             <p>オンライン学習の活用方法<br>
-            家庭学習での注意点、各科目の勉強方法など<br>
+            家庭学習、各科目の勉強方法など<br>
             様々なオンライン時代での<br>勉強方法について記載しています。</p>
         </div>
             
@@ -35,9 +35,9 @@
 </div>
 <div class = 'solid'> </div>
 
-    <div class = 'container'>
+    <div class = 'container3'>
             <div class = 'item'>
-                <img class = 'item-img' src = "{{asset('images/hogehoge.png')}}" alt ='description'>
+                <img class = 'item-img' src = "{{asset('images/eduimage.png')}}" alt ='description'>
             </div>
             <div class = 'item'>
                 <p>
