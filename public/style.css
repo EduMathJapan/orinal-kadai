@@ -175,3 +175,8 @@ header {
     margin:0 auto;
 }
      
+.answerbox{
+    width:800px;
+   height:500px;
+    border:1px solid gray;
+}

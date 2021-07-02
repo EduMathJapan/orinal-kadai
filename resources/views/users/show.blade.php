@@ -3,11 +3,10 @@
 @section('content')
 <div class='questions'>
 <h1>こちらは{{$user->name}} のページです。</h1>
-
-            @include('questions.create')
-            
+ <p>こちらは{{$user->name}}の質問一覧です</p>
             @include('questions.questions')
             
+          
 </div>
 
 

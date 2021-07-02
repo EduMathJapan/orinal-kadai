@@ -9,10 +9,6 @@
                     {!! Form::textarea('content', null, ['class' => 'form-control']) !!}
                 </div>
                 
-                <div class="form-group questions">
-                    {!! Form::label('content', '質問内容') !!}
-                    {!! Form::textarea('content', null, ['class' => 'form-control']) !!}
-                </div>
                 
                 <div class="form-group questions">
                     {!! Form::label('image_path', '画像添付（あれば）') !!}

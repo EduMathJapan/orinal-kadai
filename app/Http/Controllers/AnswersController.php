@@ -3,28 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Question;
-use App\Answer;
 
-class QuestionsController extends Controller
+class AnswersController extends Controller
 {
-    //
-     public function index()
-    {
-            
-            $questions = \App\Question::all();
-            
-        return view('questions.index', ['questions'=>$questions]);
-    }
     
-    public function store(Request $request)
+     public function store(Request $request)
     {
         // バリデーション
         $request->validate([
-            'content' => 'required|max:255',
+            'content' => 'required|max:1000',
            
         ]);
-        if ($file = $request->image_path) {
+        if ($file = $request->answer_image_path) {
             $fileName =$file->getClientOriginalName();
             $target_path = public_path('images/');
             $file->move($target_path, $fileName);
@@ -35,10 +25,9 @@ class QuestionsController extends Controller
 
 
         // 認証済みユーザ（閲覧者）の投稿として作成（リクエストされた値をもとに作成）
-        $request->user()->questions()->create([
+        $request->questions()->answer()->create([
             'content' => $request->content,
-            'subject'=> $request->subject,
-            'image_path'=>$fileName,
+            'answer_image_path'=>$fileName,
             
         ]);
 
@@ -46,25 +35,14 @@ class QuestionsController extends Controller
         return back();
     }
     
-    public function show($id)
-    {
-        //
-        $questions =Question::findOrFail($id);
-        // $contents = $questions->answer->getAnswerContent();
-        // ユーザ詳細ビューでそれを表示
-        return view('questions.show', [
-            'questions'=>$questions,
-            // 'contents'=>$contents
-        ]);
-    }
     
      public function destroy($id)
     {
         // idの値で投稿を検索して取得
-        $question = \App\Question::findOrFail($id);
+        $answer = \App\Answer::findOrFail($id);
 
         // 認証済みユーザ（閲覧者）がその投稿の所有者である場合は、投稿を削除
-        if (\Auth::id() === $question->user_id) {
+        if (\Auth::admin()) {
             $question->delete();
         }
 
@@ -72,4 +50,3 @@ class QuestionsController extends Controller
         return back();
     }
 }
-

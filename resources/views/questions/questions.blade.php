@@ -1,28 +1,32 @@
 @if (count($questions) > 0)
     <ul class="list-unstyled questions" >
-        @foreach ($questions as $question)
+       
             <li class="media mb-3">
                 <div class="media-body">
                     
                     <div>
+                        
+                        <table border="1" width = '800px'>
+                            <tr>
+                              <th width = '200px' >質問</th>
+                              <th width = '400px'>内容</th>
+                              <th width = '200px'>詳細リンク</th>
+                              
+                            </tr>
+                             @foreach ($questions as $question)
+                            <tr>
+                              <td>{!! nl2br(e($question->subject)) !!}</td>
+                              <td>{!! nl2br(e($question->content)) !!}</td>
+                              <td>
+                                  <a href='{{route('questions.show', $question->id) }}'>詳細確認</a>
+                            </td>
+                            </tr>
+                          </table>
                         {{-- 質問内容 --}}
-                        <p class="mb-0">{!! nl2br(e($question->subject)) !!}
-                         </p>
-                        <p class="mb-0">{!! nl2br(e($question->content)) !!}
-                         </p>
-                         <div>
-                       <img src="{{ asset('images/' . $question->image_path)}}">
- ~                      </div>
-                    </div>
-                    <div>
-                        @if (Auth::id() == $question->user_id)
-                            {{-- 投稿削除ボタンのフォーム --}}
-                            {!! Form::open(['route' => ['questions.destroy', $question->id], 'method' => 'delete']) !!}
-                                {!! Form::submit('解決！', ['class' => 'btn btn-danger btn-sm']) !!}
-                            {!! Form::close() !!}
-                        @endif
+                        
+                         
+                       
                     
-                    </div>
                 </div>
             </li>
         @endforeach
