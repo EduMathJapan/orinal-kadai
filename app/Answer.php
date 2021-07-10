@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Answer extends Model
 {
     //
+     protected $fillable = ['content','answer_image_path',];
+    
     public function getAnswerContent(){
         
         return $this->content;    
@@ -18,4 +20,6 @@ class Answer extends Model
     {
         return $this->belongsTo(Question::class);
     }
+    
+    
 }

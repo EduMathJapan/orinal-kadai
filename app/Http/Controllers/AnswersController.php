@@ -3,16 +3,22 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Answer;
 
 class AnswersController extends Controller
 {
     
      public function store(Request $request)
     {
+        
+        $param = $request->all();
+        $content = $param['content'];
+        $question_id = $param['question_id'];
+        
         // バリデーション
         $request->validate([
             'content' => 'required|max:1000',
-           
+          
         ]);
         if ($file = $request->answer_image_path) {
             $fileName =$file->getClientOriginalName();
@@ -22,14 +28,21 @@ class AnswersController extends Controller
             $fileName = "";
         }
         
+        //登録処理
+        $answer = new Answer();
+        $answer->content = $content;
+        $answer->question_id = $question_id;
+        $answer->answer_image_path = $fileName;
+        $answer->save();
 
-
-        // 認証済みユーザ（閲覧者）の投稿として作成（リクエストされた値をもとに作成）
-        $request->questions()->answer()->create([
-            'content' => $request->content,
-            'answer_image_path'=>$fileName,
+    //   質問のidを指定して、それの返信として投稿したい
+    // DBはquestion tableとanswers tableでわけていて、answers tableに外部キーとしてquestion_idを保有
+        // $request->questions()->answer()->create([
+        //     'content' => $content,
+        //     'answer_image_path'=>$fileName,
+        //     'question_id'=>$question_id,
             
-        ]);
+        // ]);
 
         // 前のURLへリダイレクトさせる
         return back();
@@ -49,4 +62,6 @@ class AnswersController extends Controller
         // 前のURLへリダイレクトさせる
         return back();
     }
+    
+     
 }

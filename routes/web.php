@@ -18,10 +18,13 @@ Route::resource('users','UsersController');
 
 Route::resource('questions','QuestionsController');
 Route::resource('blogs','BlogsController');
-Route::resource('answer','AnswersController');
+
 
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('login/google', 'Auth\LoginController@redirectToGoogle');
+Route::get('login/google/callback', 'Auth\LoginController@handleGoogleCallback');
 
 
 
@@ -37,12 +40,13 @@ Route::group(['middleware' => ['auth:admin']], function () {
     Route::resource('users', 'UsersController', ['only' => ['index', 'show']]);
     Route::resource('limitedblogs','LimitedblogsController');
     Route::resource('admin', 'AdminController', ['only' => ['index']]);
-    Route::resource('answer', 'AnswersController', ['only' => ['create']]);
-    Route::resource('questions', 'QuestionsController', ['only' => ['index']]);
+    Route::resource('answer', 'AnswersController', ['only' => ['create','store','show']]);
+    Route::resource('questions', 'QuestionsController', ['only' => ['index',]]);
     
 });
 
 Route::group(['middleware' => ['auth:user']], function () {
     Route::resource('users', 'UsersController', ['only' => ['show']]);
     Route::resource('limitedblogs','LimitedblogsController',['only'=>['index','show']]);
+    Route::resource('answer', 'AnswersController', ['only' => ['show']]);
 });

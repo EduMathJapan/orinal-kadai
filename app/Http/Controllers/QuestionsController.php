@@ -19,6 +19,7 @@ class QuestionsController extends Controller
     
     public function store(Request $request)
     {
+        
         // バリデーション
         $request->validate([
             'content' => 'required|max:255',
@@ -50,11 +51,15 @@ class QuestionsController extends Controller
     {
         //
         $questions =Question::findOrFail($id);
-        // $contents = $questions->answer->getAnswerContent();
+        $answers = $questions->answer()->get();
+        $contents = $questions->content;
         // ユーザ詳細ビューでそれを表示
+    
+        
         return view('questions.show', [
             'questions'=>$questions,
-            // 'contents'=>$contents
+            'contents'=>$contents,
+            'answers'=>$answers,
         ]);
     }
     
