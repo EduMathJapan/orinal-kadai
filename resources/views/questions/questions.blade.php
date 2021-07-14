@@ -22,11 +22,6 @@
                             </td>
                             </tr>
                           </table>
-                        {{-- 質問内容 --}}
-                        
-                         
-                       
-                    
                 </div>
             </li>
         @endforeach
@@ -34,3 +29,4 @@
     {{-- ページネーションのリンク --}}
     {{ $questions->links() }}
 @endif
+@include('questions.create')

@@ -3,7 +3,7 @@
 // デフォルトのコメント部分は省略
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
 
 Auth::routes();
@@ -18,13 +18,12 @@ Route::resource('users','UsersController');
 
 Route::resource('questions','QuestionsController');
 Route::resource('blogs','BlogsController');
+Route::resource('limitedblogs','LimitedblogsController');
+Route::resource('answers','AnswersController');
 
 
 
-Route::get('/home', 'HomeController@index')->name('home');
-
-Route::get('login/google', 'Auth\LoginController@redirectToGoogle');
-Route::get('login/google/callback', 'Auth\LoginController@handleGoogleCallback');
+Route::get('/home', 'HomeController@index')->name('admin.index');
 
 
 
@@ -34,19 +33,3 @@ Route::post('admin-signup', 'Auth\AdminRegisterController@register')->name('admi
 Route::get('adminlogin', 'Auth\AdminLoginController@showLoginForm')->name('adminlogin');
 Route::post('adminlogin', 'Auth\AdminLoginController@login')->name('admin.post');
 Route::get('adminlogout', 'Auth\AdminLoginController@logout')->name('adminlogout.get');
-
-
-Route::group(['middleware' => ['auth:admin']], function () {
-    Route::resource('users', 'UsersController', ['only' => ['index', 'show']]);
-    Route::resource('limitedblogs','LimitedblogsController');
-    Route::resource('admin', 'AdminController', ['only' => ['index']]);
-    Route::resource('answer', 'AnswersController', ['only' => ['create','store','show']]);
-    Route::resource('questions', 'QuestionsController', ['only' => ['index',]]);
-    
-});
-
-Route::group(['middleware' => ['auth:user']], function () {
-    Route::resource('users', 'UsersController', ['only' => ['show']]);
-    Route::resource('limitedblogs','LimitedblogsController',['only'=>['index','show']]);
-    Route::resource('answer', 'AnswersController', ['only' => ['show']]);
-});

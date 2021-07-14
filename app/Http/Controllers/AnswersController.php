@@ -10,7 +10,7 @@ class AnswersController extends Controller
     
      public function store(Request $request)
     {
-        
+        if(\Auth::guard('admin')->check()){
         $param = $request->all();
         $content = $param['content'];
         $question_id = $param['question_id'];
@@ -45,6 +45,7 @@ class AnswersController extends Controller
         // ]);
 
         // 前のURLへリダイレクトさせる
+        }
         return back();
     }
     
@@ -55,7 +56,7 @@ class AnswersController extends Controller
         $answer = \App\Answer::findOrFail($id);
 
         // 認証済みユーザ（閲覧者）がその投稿の所有者である場合は、投稿を削除
-        if (\Auth::admin()) {
+        if (\Auth::guard('admin')->check) {
             $question->delete();
         }
 

@@ -10,7 +10,7 @@
                  @if(Auth::guard('admin')->check())
                          <a href='{{route('blogs.create')}}'><li>一般ブログ投稿</li></a> 
                         <a href='{{route('limitedblogs.create')}}'><li>会員ブログ投稿</li></a> 
-                         <li><a href='{{route('home')}}'>管理者メニュー</a></li>
+                         <li><a href='{{route('admin.index')}}'>管理者メニュー</a></li>
                          <a href='{{route('adminlogout.get')}}'><li>管理者ログアウト</li></a>
                         <a href='{{ route('limitedblogs.index') }}'> <li>会員限定ブログ</li></a>
                 @endif

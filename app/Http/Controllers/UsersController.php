@@ -17,12 +17,14 @@ class UsersController extends Controller
     public function index()
     {
         //
+        
          $users = User::orderBy('id', 'desc')->paginate(10);
-
+         if(\Auth::guard('admin')->check()){
         // ユーザ一覧ビューでそれを表示
         return view('users.index', [
             'users' => $users,
         ]);
+         }
     }
 
     /**

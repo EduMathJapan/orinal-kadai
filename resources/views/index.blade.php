@@ -15,13 +15,29 @@
 
 <div class = 'container3'>
         <div class='content-item'>
+            @if(Auth::guard('user')->check())
+            <a href='{{route('blogs.index')}}'><img class='contentimg' src="{{ asset('images/edublog.png') }}" alt="blog"></a>
+            @else
             <a href='{{route('blogs.index')}}'><img class='contentimg' src="{{ asset('images/blog.png') }}" alt="blog"></a>
+            @endif
+            
             <p>オンライン学習の活用方法<br>
             家庭学習、各科目の勉強方法など<br>
             様々なオンライン時代での<br>勉強方法について記載しています。</p>
         </div>
             
         <div class = 'content-item'>
+            @if(Auth::guard('user')->check())
+            <a href='{{route('limitedblogs.index')}}'> <img class='contentimg' src="{{ asset('images/limitedblogtop.png') }}" alt="limitedblog"></a>
+            <p>会員限定ブログの閲覧<br>
+            が可能です。<br>
+            </p>
+        </div>    
+        <div class = 'content-item'>
+           <a href='{{route('logout.get')}}'> <img class='contentimg' src="{{ asset('images/logout.png') }}" alt="logout"></a>
+            <p>ログアウトする</p>
+            </div>  
+            @else
            <a href='{{route('signup.post')}}'> <img class='contentimg' src="{{ asset('images/register.png') }}" alt="signup"></a>
             <p>会員登録いただくと<br>
             会員限定ブログの閲覧<br>
@@ -32,6 +48,7 @@
            <a href='{{route('login')}}'> <img class='contentimg' src="{{ asset('images/login.png') }}" alt="login"></a>
             <p>会員の方はこちらから</p>
         </div>    
+           @endif
 </div>
 <div class = 'solid'> </div>
 
